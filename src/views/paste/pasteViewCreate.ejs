@@ -1,0 +1,28 @@
+<%- include('../layout/header.ejs'); %>
+
+    <form action="/paste" method="post">
+        <div class="form-group">
+            <label>
+                Otsikko
+            </label>
+            <input type="text" class="form-control" name="title" />
+        </div>
+        <div class="form-group">
+            <label>
+                Kuvaus
+            </label>
+            <input type="text" class="form-control" name="description" />
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">
+                Teksti
+            </label>
+            <textarea type="text" class="form-control" rows="20" name="body"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-secondary ma-2">
+            Tallenna
+        </button>
+    </form>
+
+    <%- include('../layout/footer.ejs'); %>

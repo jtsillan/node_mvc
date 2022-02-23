@@ -1,0 +1,30 @@
+{
+    "name": "node_mvc",
+    "version": "1.0.0",
+    "description": "Web-ohjelmointi ja sovelluskehykset opintojakson MVC arkkitehtuurin esimerkki",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "some git url"
+    },
+    "type": "module",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^14.3.2",
+        "ejs": "^3.1.6",
+        "express": "^4.17.2",
+        "highlight.js": "^11.4.0",
+        "html-escaper": "^3.0.3",
+        "mongodb": "^4.3.1",
+        "mongoose": "^6.1.8"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.15"
+    }
+}

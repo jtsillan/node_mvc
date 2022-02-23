@@ -1,0 +1,18 @@
+<%- include('../layout/header.ejs'); %>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">MVC esimerkki Nodella</h1>
+                <p class="lead "> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias repudiandae deserunt consectetur, dolorum numquam magnam id consequatur vero, beatae obcaecati repellat voluptatibus animi accusamus delectus fuga tempore ratione deleniti
+                    quo! </p>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2  g-3">
+            <% pasteItems.forEach((paste)=> { %>
+                <%- include('pasteItem', paste); %>
+                    <% }); %>
+        </div>
+    </div>
+    <%- include('../layout/footer.ejs'); %>
