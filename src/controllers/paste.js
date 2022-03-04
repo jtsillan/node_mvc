@@ -2,11 +2,13 @@ import Paste from "../models/paste.js";
 import hljs from 'highlight.js'
 import { escape } from "html-escaper";
 
+// Hakee kaikki Pastet kun endpoint on "/"
 const getAllPastes = async(req, res, next) => {
     try {
         const pasteItems = await Paste.find({});
         if (!pasteItems) return res.status(404).send();
 
+        // Näyttää Paste itemit 'pasteViewAll.ejs' mukaisesti
         res.render('paste/pasteViewAll', { pasteItems })
     } catch (e) {
         next(e);
@@ -14,11 +16,13 @@ const getAllPastes = async(req, res, next) => {
 }
 
 const getPaste = async(req, res, next) => {
-    if (!req.params.id) return res.status(400).send();
+    if (!req.params.id) return res.status(400).send();     
+               
+    
     try {
         const paste = await Paste.findById(req.params.id);
-        if (!paste) return res.status(404).send();
-
+        if (!paste) return res.status(404).send();       
+        
         res.render('paste/pasteViewSingle', paste)
     } catch (e) {
         next(e);

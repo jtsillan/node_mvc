@@ -1,21 +1,17 @@
 <div class="col">
-    <h2><%= title  %></h2>
     <div class="card shadow-md bg-dark text-light">
+        <h2><%= title  %></h2>
         <div class="card-body">
-            <p class="card-text p-2">
-                <%= description  %>
-            </p>
             <div class="overflow-auto bg-black  p-2" style="max-height: 400px;">
-                <pre><code><%- body  %></code></pre>
+                <pre><%- content  %></pre>
             </div>
-            
+        
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group ">
-
-                    <a class="btn btn-sm btn-outline-secondary bg-light m-1 text-black" href="/paste/<%= id  %>">Avaa</a>
-                    <form action="/delete/<%= id  %>" method="get">
+                    <a class="btn btn-sm btn-outline-secondary bg-light m-1 text-black" href="/note/<%= id  %>">Avaa</a>
+                    <form action="/delete_note/<%= id  %>" method="get">
                         <button type="submit" class="btn btn-sm btn-outline-secondary bg-light m-1 text-black">Poista</button>
-                    </form>
+                    </form>                    
                 </div>
             </div>
         </div>

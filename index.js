@@ -2,7 +2,7 @@ import express from "express";
 import router from "./src/router.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import path from 'path'
+
 dotenv.config()
 
 mongoose.connect(process.env.MONGO_URL, {
