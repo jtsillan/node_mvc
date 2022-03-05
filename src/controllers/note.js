@@ -15,7 +15,7 @@ const getAllNotes = async(req, res, next) => {
 }
 
 
-const getNote= async(req, res, next) => {
+const getNote = async(req, res, next) => {
     if (!req.params.id) return res.status(400).send();     
                
     
@@ -85,11 +85,55 @@ const deleteNote = async(req, res, next) => {
     }
 }
 
-/*
-const modifyNote = async(req, res, next) => {
-    res.render('note/noteViewCreate')
+
+const getModifyNote = async(req, res, next) => {    
+
+    // Jos pyynnössä ei vastaa palautetaan 'bad request' ilmoitus
+    if (!req.params.id) return res.status(400).send();     
+               
+    
+    try { // Tarkistetaan löytyykö Paste id:n perusteella tietokannasta
+        const note = await Note.findById(req.params.id);
+
+        // Jos Pastea ei löydy, palautetaan 'Not Found' ilmoitus
+        if (!note) return res.status(404).send();       
+        
+        // Näyttää oikean Pasten 'note_modify/:id' endpointissa
+        res.render('note/noteViewModify', note)
+
+    } catch (e) {
+
+        // Ohjelman kaatuessa lähetetään error middlewaren käsiteltäväksi
+        next(e);
+    }
+    
 }
-*/
+
+const postModifyNote = async(req, res, next) => {
+
+    try {
+        // Ottaa vastaan POST requestin bodyssä seuraavat tiedot:
+        // title, content
+        const { title, content } = req.body
+    
+        // Päivitetään Note instanssin data tietokantaan
+        const data = await Note.findByIdAndUpdate(req.params.id, { title, content }, { new: true});
+
+        // Jos tietokanta ei anna vastausta niin toiminto on epäonnistunut
+        // ja lähetetään error status 500 - internal server error
+        if (!data) return res.status(500).send()
+
+        // Päivitetty data luotu onnistuneesti
+        // Luodaan noteViewSingle html sivu ja palautetaan se selaimelle luodun note datan kanssa
+        res.render('note/noteViewSingle', data)
+
+    } catch (e) {
+        // Jos ohjelma kaatuu niin lähetetään error middlewaren käsiteltäväksi
+        next(e)
+    }
+}
+
+
 
 export default {
     getCreateNewNote,
@@ -97,5 +141,6 @@ export default {
     deleteNote,
     getAllNotes,
     getNote,
-    //modifyNote
+    getModifyNote,
+    postModifyNote
 }

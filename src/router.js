@@ -16,7 +16,8 @@ router.get("/note/:id", [NoteController.getNote, catchError]);
 router.get("/note", NoteController.getCreateNewNote)
 router.post("/note", [NoteController.postCreateNewNote, catchError])
 
-router.get("/delete_note/:id", [NoteController.deleteNote, catchError])
-//router.get("/modify_note/:id", [NoteController.modifyNote, catchError])
+router.get("/note_delete/:id", [NoteController.deleteNote, catchError])
+router.get("/note_modify/:id", [NoteController.getModifyNote, catchError])
+router.post("/note_modify/:id", [NoteController.postModifyNote, catchError])
 
 export default router;

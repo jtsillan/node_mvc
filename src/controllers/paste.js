@@ -10,26 +10,38 @@ const getAllPastes = async(req, res, next) => {
 
         // Näyttää Paste itemit 'pasteViewAll.ejs' mukaisesti
         res.render('paste/pasteViewAll', { pasteItems })
+   
     } catch (e) {
+
+         // Ohjelman kaatuessa lähetetään error middlewaren käsiteltäväksi 
         next(e);
     }
 }
 
+// Hakee yksittäisen Pasten id:n perusteella, endpoint "paste/:id"
 const getPaste = async(req, res, next) => {
+
+    // Jos pyynnössä ei vastaa palautetaan 'bad request' ilmoitus
     if (!req.params.id) return res.status(400).send();     
                
     
-    try {
+    try { // Tarkistetaan löytyykö Paste id:n perusteella tietokannasta
         const paste = await Paste.findById(req.params.id);
+
+        // Jos Pastea ei löydy, palautetaan 'Not Found' ilmoitus
         if (!paste) return res.status(404).send();       
         
+        // Näyttää oikean Pasten 'paste/:id' endpointissa
         res.render('paste/pasteViewSingle', paste)
+
     } catch (e) {
+
+        // Ohjelman kaatuessa lähetetään error middlewaren käsiteltäväksi
         next(e);
     }
 }
 
-
+// Renderöi lomakkeen uuden pasten tietokantaan luomiselle
 const getCreateNewPaste = (req, res, next) => {
     res.render('paste/pasteViewCreate')
 }
@@ -74,7 +86,10 @@ const postCreateNewPaste = async(req, res, next) => {
     }
 }
 
+// Poistaa valitun Pasten id:n perusteella
 const deletePaste = async(req, res, next) => {
+
+    // 
     if (!req.params.id) return res.status(400).send();
     try {
         const paste = await Paste.findById(req.params.id);
@@ -88,6 +103,7 @@ const deletePaste = async(req, res, next) => {
     }
 }
 
+// Tuodaan muuttujat routerille
 export default {
     getPaste,
     getAllPastes,
